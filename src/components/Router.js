@@ -8,6 +8,7 @@ import Navegation from './Navegation';
 import Posts from './Posts';
 import SinglePost from './SinglePost';
 import Form from './Form';
+import Edit from './Edit';
 
 class Router extends Component {
     state = {
@@ -72,6 +73,33 @@ class Router extends Component {
             })
     }
 
+    editPost = (postA) => {
+        axios.put(`https://jsonplaceholder.typicode.com/posts/${postA.id}`, {postA})
+            .then(res => {
+                if(res.status === 200){
+                    swal(
+                        'Post Editado!',
+                        'El Post se ha modificado correctamente',
+                        'success'
+                    );
+                    
+                    let postId = res.data.id;
+                    const posts = [...this.state.posts];
+
+                    const postEdit = posts.findIndex(post => postId === post.id);
+
+                    posts[postEdit] = postA;
+
+                    this.setState({
+                        posts
+                    });
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
     render() {
         return (
             <BrowserRouter>
@@ -113,6 +141,24 @@ class Router extends Component {
                                     />
                                 )
                             }}/>
+
+                            <Route exact path="/editar/:postId" render={ (props) => {
+                                let idPost = props.location.pathname.replace('/editar/', '');
+
+                                const posts = this.state.posts;
+
+                                let post;
+                                post = posts.filter(post => (
+                                    post.id === Number(idPost)
+                                ));
+
+                                return (
+                                    <Edit
+                                        post={post[0]}
+                                        editPost = {this.editPost}
+                                    />
+                                )
+                            }} />
                         </Switch>
                     </div>
                 </div>

@@ -35,6 +35,7 @@ class Post extends Component {
                 <td>{title}</td>
                 <td>
                     <Link to={`/post/${id}`} className="btn btn-sm btn-primary">Ver</Link>
+                    <Link to={`/editar/${id}`} className="btn btn-sm btn-warning">Editar</Link>
                     <button type="button" onClick={ this.deleteConfirmation} className="btn btn-sm btn-danger">Eliminar</button>
                 </td>
             </tr>
