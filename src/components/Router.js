@@ -49,7 +49,20 @@ class Router extends Component {
     }
 
     createPost = (post) => {
-        console.log(post)
+        axios.post(`https://jsonplaceholder.typicode.com/posts`, {post})
+            .then(res => {
+                if(res.status === 201){
+                    let postId = {id: res.data.id};
+                    const newPost = Object.assign({}, res.data.post, postId);
+
+                    this.setState(prevState => ({
+                        posts: [...prevState.posts, newPost]
+                    }));
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     render() {
