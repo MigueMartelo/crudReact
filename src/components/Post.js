@@ -10,7 +10,7 @@ class Post extends Component {
                 <td>{title}</td>
                 <td>
                     <Link to={`/post/${id}`} className="btn btn-sm btn-primary">Ver</Link>
-                    <button type="button" className="btn btn-sm btn-danger">Eliminar</button>
+                    <button type="button" onClick={ () => this.props.deletePost(id)} className="btn btn-sm btn-danger">Eliminar</button>
                 </td>
             </tr>
         );
