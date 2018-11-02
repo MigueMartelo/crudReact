@@ -1,12 +1,31 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 
 import Header from './Header';
 import Navegation from './Navegation';
 
 class Router extends Component {
+    state = {
+        posts: []
+    }
+
+    componentDidMount() {
+        this.getPosts();
+    }
+
+    getPosts = () => {
+        axios.get(`https://jsonplaceholder.typicode.com/posts`)
+            .then(res => {
+                this.setState({
+                    posts: res.data
+                })
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
     render() {
         return (
             <BrowserRouter>
@@ -21,8 +40,5 @@ class Router extends Component {
     }
     
 }
-
-Router.propTypes = {
-};
 
 export default Router;
