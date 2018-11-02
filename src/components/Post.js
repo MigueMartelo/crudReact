@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 
 class Post extends Component {
     render() {
@@ -8,7 +9,7 @@ class Post extends Component {
                 <td>{id}</td>
                 <td>{title}</td>
                 <td>
-                    <button type="button" className="btn btn-sm btn-primary">Ver</button>
+                    <Link to={`/post/${id}`} className="btn btn-sm btn-primary">Ver</Link>
                     <button type="button" className="btn btn-sm btn-danger">Eliminar</button>
                 </td>
             </tr>
