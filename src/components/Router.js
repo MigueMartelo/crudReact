@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import Header from './Header';
 import Navegation from './Navegation';
+import Posts from './Posts';
 
 class Router extends Component {
     state = {
@@ -33,6 +34,15 @@ class Router extends Component {
                     <div className="row justify-content-center">
                         <Header />
                         <Navegation />
+                        <Switch>
+                            <Route exact path="/" render={ () => {
+                                return (
+                                    <Posts
+                                        posts = {this.state.posts}
+                                    />
+                                )
+                            }}/>
+                        </Switch>
                     </div>
                 </div>
             </BrowserRouter>
