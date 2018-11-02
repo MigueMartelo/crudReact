@@ -6,6 +6,7 @@ import Header from './Header';
 import Navegation from './Navegation';
 import Posts from './Posts';
 import SinglePost from './SinglePost';
+import Form from './Form';
 
 class Router extends Component {
     state = {
@@ -35,7 +36,7 @@ class Router extends Component {
                     const posts = [...this.state.posts];
 
                     let res = posts.filter(post => (
-                        post.id != id
+                        post.id !== id
                     ));
                     this.setState({
                         posts: res
@@ -45,6 +46,10 @@ class Router extends Component {
             .catch(err => {
                 console.log(err);
             })
+    }
+
+    createPost = (post) => {
+        console.log(post)
     }
 
     render() {
@@ -80,6 +85,14 @@ class Router extends Component {
                                     />
                                 )
                             }} />
+
+                            <Route exact path="/crear" render={ () => {
+                                return (
+                                    <Form                                        
+                                        createPost = {this.createPost}
+                                    />
+                                )
+                            }}/>
                         </Switch>
                     </div>
                 </div>
