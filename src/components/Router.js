@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import axios from 'axios';
+import swal from 'sweetalert2';
 
 import Header from './Header';
 import Navegation from './Navegation';
@@ -52,6 +53,12 @@ class Router extends Component {
         axios.post(`https://jsonplaceholder.typicode.com/posts`, {post})
             .then(res => {
                 if(res.status === 201){
+                    swal(
+                        'Post Creado!',
+                        'El Post se ha creado correctamente',
+                        'success'
+                    );
+                    
                     let postId = {id: res.data.id};
                     const newPost = Object.assign({}, res.data.post, postId);
 
